@@ -1,0 +1,31 @@
+### Creates a User
+
+POST http://localhost:3000/auth/
+Content-Type: application/json
+
+{
+    "name": "Morgan",
+    //TODO: Stop blank emails from submitting
+    "email": "",
+    "password": "password123"
+}
+
+
+### Gets a User by ID
+//"fd511dec-4660-4029-bcd1-7b3207a62b16"
+GET http://localhost:3000/auth/fd511dec-4660-4029-bcd1-7b3207a62b16
+
+
+### Gets a User by Email
+// "morgan@test.com"
+GET http://localhost:3000/auth?email=morgan@test.com
+
+
+### Updates a User's name
+
+PATCH http://localhost:3000/auth/fd511dec-4660-4029-bcd1-7b3207a62b16
+Content-Type: application/json
+
+{
+    "name": "Mo"
+}
