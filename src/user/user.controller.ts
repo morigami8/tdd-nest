@@ -11,6 +11,7 @@ import {
 import { CreateUserDto } from './dtos/createUser.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
+import { UpdateUserDto } from './dtos/updateUser.dto';
 
 @Controller('auth')
 export class UserController {
@@ -45,11 +46,8 @@ export class UserController {
   }
 
   @Patch('/:id')
-  async updateUser(
-    @Param('id') id: string,
-    @Body() updates: Partial<CreateUserDto>,
-  ) {
-    const user = await this.usersService.updateUser(id, updates);
+  async updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
+    const user = await this.usersService.updateUser(id, body);
 
     return user;
   }

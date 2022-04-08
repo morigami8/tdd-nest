@@ -5,6 +5,7 @@ import { CreateUserDto } from './dtos/createUser.dto';
 import { UserController } from './user.controller';
 import { User } from './user.entity';
 import { UserService } from './user.service';
+import { UpdateUserDto } from './dtos/updateUser.dto';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -123,24 +124,11 @@ describe('UserController', () => {
   });
 
   describe('UpdateUser Tests', () => {
-    it('updates the users name', async () => {
+    it('updates the users email and passsword', async () => {
       const id = randomUUID();
-      const updates: Partial<User> = {
-        name: 'Mo',
-      };
-
-      const user = await controller.updateUser(id, updates);
-      expect(user).toEqual({
-        id: expect.any(String),
-        name: 'Mo',
-        email: 'morgan@test.com',
-      });
-    });
-
-    it('updates the users email', async () => {
-      const id = randomUUID();
-      const updates: Partial<User> = {
+      const updates: UpdateUserDto = {
         email: 'test@test.com',
+        password: 'pas123',
       };
 
       const user = await controller.updateUser(id, updates);
@@ -148,21 +136,7 @@ describe('UserController', () => {
         id: expect.any(String),
         name: 'Morgan',
         email: 'test@test.com',
-      });
-    });
-
-    it('updates the users email and name', async () => {
-      const id = randomUUID();
-      const updates: Partial<User> = {
-        name: 'Mo',
-        email: 'test@test.com',
-      };
-
-      const user = await controller.updateUser(id, updates);
-      expect(user).toEqual({
-        id: expect.any(String),
-        name: 'Mo',
-        email: 'test@test.com',
+        password: 'pas123',
       });
     });
   });

@@ -29,3 +29,7 @@ Content-Type: application/json
 {
     "name": "Mo"
 }
+
+####
+
+GET http://localhost:3000/auth/
