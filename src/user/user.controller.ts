@@ -13,7 +13,7 @@ import { User } from './user.entity';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dtos/updateUser.dto';
 
-@Controller('auth')
+@Controller('user')
 export class UserController {
   constructor(private usersService: UserService) {}
 

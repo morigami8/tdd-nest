@@ -1,6 +1,6 @@
 ### Creates a User
 
-POST http://localhost:3000/auth/
+POST http://localhost:3000/user/
 Content-Type: application/json
 
 {
@@ -13,23 +13,20 @@ Content-Type: application/json
 
 ### Gets a User by ID
 //"fd511dec-4660-4029-bcd1-7b3207a62b16"
-GET http://localhost:3000/auth/fd511dec-4660-4029-bcd1-7b3207a62b16
+GET http://localhost:3000/user/fd511dec-4660-4029-bcd1-7b3207a62b16
 
 
 ### Gets a User by Email
 // "morgan@test.com"
-GET http://localhost:3000/auth?email=morgan@test.com
+GET http://localhost:3000/user?email=morgan@test.com
 
 
 ### Updates a User's name
 
-PATCH http://localhost:3000/auth/fd511dec-4660-4029-bcd1-7b3207a62b16
+PATCH http://localhost:3000/user/fd511dec-4660-4029-bcd1-7b3207a62b16
 Content-Type: application/json
 
 {
-    "name": "Mo"
+    
+    "password": "password123"
 }
-
-####
-
-GET http://localhost:3000/auth/
