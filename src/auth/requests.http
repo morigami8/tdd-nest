@@ -1,0 +1,10 @@
+### Signs up user with JWT
+
+POST http://localhost:3000/auth/
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "password123",
+  "name": "Morgan"
+}
