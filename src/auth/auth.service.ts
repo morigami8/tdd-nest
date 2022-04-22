@@ -1,27 +1,35 @@
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { scrypt as _scrypt, randomBytes, createHash } from 'crypto';
-import { promisify } from 'util';
 import { UserService } from '../user/user.service';
-promisify(_scrypt);
+import { scrypt as _scrypt, randomBytes } from 'crypto';
+import { promisify } from 'util';
+import * as bcrypt from 'bcrypt';
+
+const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly jwtService: JwtService,
-    private usersService: UserService,
-  ) {}
+  constructor(private usersService: UserService) {}
 
-  signUp(email: string, pass: string) {
-    const salt = randomBytes(128).toString('base64');
+  async signUp(email: string, pass: string) {
+    const saltRounds = 12;
 
-    const saltPassword = `${pass}.${salt}`;
+    //async
+    const salt = await bcrypt.genSalt(saltRounds);
 
-    let hash = createHash('sha256');
-    hash.update(saltPassword);
+    const password = await bcrypt.hash(pass, salt);
 
-    let password = hash.digest().toString('hex');
+    // const salt = randomBytes(8).toString('hex');
 
-    this.usersService.createUser({ email, password, name: 'blah' });
+    // const hash = (await scrypt(pass, salt, 32)) as Buffer;
+
+    // const password = salt + '.' + hash.toString('hex');
+
+    const user = await this.usersService.createUser({
+      email,
+      password,
+      name: 'blah',
+    });
+
+    return user;
   }
 }
