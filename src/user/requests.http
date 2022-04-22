@@ -30,3 +30,8 @@ Content-Type: application/json
     
     "password": "password123"
 }
+
+
+### Deletes User
+
+DELETE  http://localhost:3000/user/f0b9ece3-f346-4bf3-8c8c-1ad407abcbb4

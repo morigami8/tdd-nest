@@ -6,8 +6,9 @@ import { CreateUserDto } from '../user/dtos/createUser.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post()
-  signUp(@Body() body) {
-    return this.authService.signUp(body.email, body.password);
+  @Post('/signup')
+  async signUp(@Body() body: CreateUserDto) {
+    const user = await this.authService.signUp(body.email, body.password);
+    return user;
   }
 }
