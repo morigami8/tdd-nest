@@ -24,7 +24,6 @@ describe('UserController', () => {
         email: 'morgan@test.com',
       }),
       createUser: jest.fn().mockResolvedValue({
-        name: 'Morgan',
         email: 'morgan@test.com',
         password: 'password123',
       }),
@@ -85,7 +84,6 @@ describe('UserController', () => {
   describe('createUser Tests', () => {
     it('should return newly create user', async () => {
       const candidate = {
-        name: 'Morgan',
         password: 'password123',
         email: 'morgan@test.com',
       };

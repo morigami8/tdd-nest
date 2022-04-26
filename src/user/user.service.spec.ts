@@ -62,12 +62,10 @@ describe('UserService', () => {
         .mockImplementation(() => Promise.resolve(null));
 
       let dto: CreateUserDto = {
-        name: 'Morgan',
         email: 'test@test.com',
         password: 'asdf',
       };
       expect(await mockUserRepository.createUser(dto)).toEqual({
-        name: 'Morgan',
         email: 'test@test.com',
         password: 'asdf',
       });
@@ -75,8 +73,6 @@ describe('UserService', () => {
 
     it('should call createUser but return error, user already exists!', async () => {
       let dto = {
-        id: '8',
-        name: 'Morgan',
         email: 'test@test.com',
         password: 'asdf',
       };

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { scrypt as _scrypt, randomBytes } from 'crypto';
 import { promisify } from 'util';
@@ -18,17 +18,30 @@ export class AuthService {
 
     const password = await bcrypt.hash(pass, salt);
 
-    // const salt = randomBytes(8).toString('hex');
-
-    // const hash = (await scrypt(pass, salt, 32)) as Buffer;
-
-    // const password = salt + '.' + hash.toString('hex');
-
     const user = await this.usersService.createUser({
       email,
       password,
-      name: 'blah',
     });
+
+    return user;
+  }
+
+  async signUserIn(email: string, pass: string) {
+    //find user by email from users service
+    //if user exists - get hashed value from response
+    //bcrypt compare the password given and the response password
+    //return user if success
+
+    const [user] = await this.usersService.findByEmail(email);
+
+    if (!user) {
+      throw new BadRequestException('Incorrect username or password');
+    }
+
+    let compareResult = await bcrypt.compare(pass, user.password);
+    if (!compareResult) {
+      throw new BadRequestException('Incorrect username or password');
+    }
 
     return user;
   }
