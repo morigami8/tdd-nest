@@ -11,4 +11,11 @@ export class AuthController {
     const user = await this.authService.signUp(body.email, body.password);
     return user;
   }
+
+  @Post('/signin')
+  async signIn(@Body() body: CreateUserDto) {
+    const user = await this.authService.signUserIn(body.email, body.password);
+
+    return user;
+  }
 }
