@@ -3,12 +3,16 @@ import { UserService } from '../user/user.service';
 import { scrypt as _scrypt, randomBytes } from 'crypto';
 import { promisify } from 'util';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UserService) {}
+  constructor(
+    private usersService: UserService,
+    private jwtService: JwtService,
+  ) {}
 
   async signUp(email: string, pass: string) {
     const saltRounds = 12;
@@ -42,7 +46,12 @@ export class AuthService {
     if (!compareResult) {
       throw new BadRequestException('Incorrect username or password');
     }
+    const payload = { id: user.id, email: user.email };
 
-    return user;
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+
+    //return user;
   }
 }

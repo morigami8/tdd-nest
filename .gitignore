@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+# Constants
+/src/auth/constants
+
 # Logs
 logs
 *.log
