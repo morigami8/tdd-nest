@@ -7,11 +7,14 @@ import {
   Patch,
   Post,
   Query,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dtos/updateUser.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -24,7 +27,7 @@ export class UserController {
     return user;
   }
 
-  @Get()
+  @Get('')
   async findAllUsers(@Query('email') email: string) {
     const user = await this.usersService.findByEmail(email);
 
