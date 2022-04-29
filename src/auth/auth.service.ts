@@ -30,7 +30,7 @@ export class AuthService {
     return user;
   }
 
-  async signUserIn(email: string, pass: string) {
+  async validateUser(email: string, pass: string) {
     //find user by email from users service
     //if user exists - get hashed value from response
     //bcrypt compare the password given and the response password
@@ -46,12 +46,15 @@ export class AuthService {
     if (!compareResult) {
       throw new BadRequestException('Incorrect username or password');
     }
-    const payload = { id: user.id, email: user.email };
+    const { password, ...result } = user;
+    return result;
+  }
+
+  async signUserIn(user) {
+    const payload = { username: user.email, sub: user.id };
 
     return {
       access_token: this.jwtService.sign(payload),
     };
-
-    //return user;
   }
 }

@@ -18,7 +18,7 @@ GET http://localhost:3000/user/fd511dec-4660-4029-bcd1-7b3207a62b16
 
 ### Gets a User by Email
 // "morgan@test.com"
-GET http://localhost:3000/user?email=morgan@test.com
+GET http://localhost:3000/user/findAll?email=test2@test.com
 
 
 ### Updates a User's name
@@ -35,3 +35,10 @@ Content-Type: application/json
 ### Deletes User
 
 DELETE  http://localhost:3000/user/f0b9ece3-f346-4bf3-8c8c-1ad407abcbb4
+
+
+### Gets User profile
+//
+GET http://localhost:3000/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QyQHRlc3QuY29tIiwic3ViIjoiNmQzZTZlNmEtY2JkMy00ZDIwLTg1OTItNWVlMjA4N2E3ZjlmIiwiaWF0IjoxNjUxMjA0OTc2LCJleHAiOjE2NTEyMDUwOTZ9.taN3B7_ni5VYHIptQtmpQfGw6B8zBMCEZ-6H20IWb7c
+
