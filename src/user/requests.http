@@ -23,7 +23,7 @@ GET http://localhost:3000/user/findAll?email=test2@test.com
 
 ### Updates a User's name
 
-PATCH http://localhost:3000/user/fd511dec-4660-4029-bcd1-7b3207a62b16
+PATCH http://localhost:3000/user/71e999d8-1535-4026-a234-986ef8dc1a41
 Content-Type: application/json
 
 {
