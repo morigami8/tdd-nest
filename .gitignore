@@ -4,6 +4,7 @@
 
 # Constants
 /src/auth/constants
+.env
 
 # Logs
 logs
