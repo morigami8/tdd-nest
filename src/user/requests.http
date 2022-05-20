@@ -25,10 +25,11 @@ GET http://localhost:3000/user/findAll?email=test2@test.com
 
 PATCH http://localhost:3000/user/71e999d8-1535-4026-a234-986ef8dc1a41
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiIwNmM5ZjY5Zi01MzhlLTRmZGUtYjRjMC0zNjNjMTU5NTNlNWIiLCJpYXQiOjE2NTE4MDgzMzIsImV4cCI6MTY1MTgwODQ1Mn0.y3CYJ5zCavm1C6P42u7iBibZBrMhoQyzILDuXZ1-ISE
 
 {
     
-    "password": "password123"
+    "password": "password1234"
 }
 
 
