@@ -15,6 +15,7 @@ import { User } from './user.entity';
 import { UserService } from './user.service';
 import { UpdateUserDto } from './dtos/updateUser.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { createQueryBuilder } from 'typeorm';
 
 @Controller('user')
 export class UserController {
@@ -22,7 +23,14 @@ export class UserController {
 
   @Get('/:id')
   async findOneUser(@Param('id') id: string) {
-    const user = await this.usersService.findOne(id);
+    // const user = await this.usersService.findOne(id);
+
+    // return user;
+
+    const user = createQueryBuilder(User, 'user')
+      .select('user')
+      .where('user.id = :id', { id: id })
+      .getOne();
 
     return user;
   }

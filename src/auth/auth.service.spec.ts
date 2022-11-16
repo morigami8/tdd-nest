@@ -3,6 +3,7 @@ import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { AppModule } from '../app.module';
+import { JwtService, JwtModule } from '@nestjs/jwt';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -10,7 +11,14 @@ describe('AuthService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [UserModule, AppModule],
+      imports: [
+        UserModule,
+        AppModule,
+        JwtModule.register({
+          secret: process.env.JWT_SECRET,
+          signOptions: { expiresIn: '120s' },
+        }),
+      ],
       providers: [
         AuthService,
         {
