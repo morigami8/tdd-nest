@@ -36,31 +36,6 @@ import { Connection } from 'typeorm';
     },
   ],
 })
-
-// @Module({
-//   imports: [
-//     UserModule,
-//     TypeOrmModule.forRoot({
-//       type: 'sqlite',
-//       database: 'sqlite.test.db',
-//       synchronize: true,
-//       entities: [User],
-//     }),
-//     AuthModule,
-//   ],
-//   controllers: [AppController],
-//   providers: [
-//     AppService,
-//     {
-//       provide: APP_PIPE,
-//       useValue: new ValidationPipe({
-//         whitelist: true,
-//         forbidNonWhitelisted: true,
-//         transform: true,
-//       }),
-//     },
-//   ],
-// })
 export class AppModule {
   constructor(private connection: Connection) {}
 }

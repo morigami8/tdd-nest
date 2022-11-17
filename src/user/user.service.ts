@@ -8,11 +8,13 @@ import { createQueryBuilder, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { User } from './user.entity';
 import { UpdateUserDto } from './dtos/updateUser.dto';
+import { LoggerService } from '../infrastructure/logger/logger.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private loggerService: LoggerService,
   ) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
@@ -35,6 +37,7 @@ export class UserService {
       .where('user.id = :id', { id: id })
       .getOne();
 
+    this.loggerService.log('200', 'Found one customer!');
     if (!user) {
       throw new NotFoundException("User doesn't exist");
     }
