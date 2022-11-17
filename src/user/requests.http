@@ -5,7 +5,6 @@ Content-Type: application/json
 
 {
     "name": "Morgan",
-    //TODO: Stop blank emails from submitting
     "email": "",
     "password": "password123"
 }

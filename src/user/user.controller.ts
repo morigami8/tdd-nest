@@ -23,16 +23,17 @@ export class UserController {
 
   @Get('/:id')
   async findOneUser(@Param('id') id: string) {
-    // const user = await this.usersService.findOne(id);
-
-    // return user;
-
-    const user = createQueryBuilder(User, 'user')
-      .select('user')
-      .where('user.id = :id', { id: id })
-      .getOne();
+    const user = await this.usersService.findOne(id);
 
     return user;
+
+    //TODO: THIS IS THE CONTROLLER CHANGE THIS CODE TO THE SERVICE!!!!
+    // const user = createQueryBuilder(User, 'user')
+    //   .select('user')
+    //   .where('user.id = :id', { id: id })
+    //   .getOne();
+
+    // return user;
   }
 
   @Get('')

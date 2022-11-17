@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { createQueryBuilder, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { User } from './user.entity';
 import { UpdateUserDto } from './dtos/updateUser.dto';
@@ -25,12 +25,16 @@ export class UserService {
     }
 
     const user = this.userRepository.create(createUserDto);
-    //TODO inject repo
+
     return this.userRepository.save(user);
   }
 
   async findOne(id: string): Promise<User> {
-    const user = await this.userRepository.findOne(id);
+    const user = await createQueryBuilder(User, 'user')
+      .select('user')
+      .where('user.id = :id', { id: id })
+      .getOne();
+
     if (!user) {
       throw new NotFoundException("User doesn't exist");
     }

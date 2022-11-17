@@ -13,7 +13,7 @@ describe('UserController', () => {
 
   beforeEach(async () => {
     mockUserService = {
-      findOne: jest.fn().mockResolvedValue({
+      findOneUser: jest.fn().mockResolvedValue({
         id: randomUUID(),
         name: 'Morgan',
         email: 'test@test.com',
@@ -60,6 +60,7 @@ describe('UserController', () => {
     it('should return found user by uuid', async () => {
       const id = randomUUID();
       const user = await controller.findOneUser(id);
+      //const user = { id: 'hello', name: 'Morgan', email: 'test@test.com' };
 
       expect(user).toEqual({
         id: expect.any(String),
