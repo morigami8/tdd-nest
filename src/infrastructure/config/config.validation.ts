@@ -41,6 +41,7 @@ class EnvironmentVariables {
 }
 
 export function validate(config: Record<string, unknown>) {
+  let temp = process.env.NODE_ENV;
   const validatedConfig = plainToClass(EnvironmentVariables, config, {
     enableImplicitConversion: true,
   });

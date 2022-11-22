@@ -6,13 +6,31 @@ import { DatbaseConfig } from '../../domain/config/database-config.interface';
 export class EnvironmentConfigService implements DatbaseConfig {
   constructor(private configService: ConfigService) {}
 
-  DATABASE = this.configService.get<string>('DATABASE');
-  DATABASE_TYPE = this.configService.get<string>('DATABASE_TYPE');
-  DATABASE_HOST = this.configService.get<string>('DATABASE_HOST');
-  DATABASE_PORT = this.configService.get<number>('DATABASE_PORT');
-  DATABASE_USERNAME = this.configService.get<string>('DATABASE_USERNAME');
-  DATABASE_PASSWORD = this.configService.get<string>('DATABASE_PASSWORD');
-  DATABASE_SYNCHRONIZE = this.configService.get<boolean>(
-    'DATABASE_SYNCHRONIZE',
-  );
+  getDatabase(): string {
+    return this.configService.get<string>('DATABASE');
+  }
+
+  getDatabaseType(): string {
+    return this.configService.get<string>('DATABASE_TYPE');
+  }
+
+  getDatabaseHost(): string {
+    return this.configService.get<string>('DATABASE_HOST');
+  }
+
+  getDatabasePort(): number {
+    return this.configService.get<number>('DATABASE_PORT');
+  }
+
+  getDatabaseUser(): string {
+    return this.configService.get<string>('DATABASE_USER');
+  }
+
+  getDatabasePassword(): string {
+    return this.configService.get<string>('DATABASE_PASSWORD');
+  }
+
+  getDatabaseSync(): boolean {
+    return this.configService.get<boolean>('DATABASE_SYNCHRONIZE');
+  }
 }
