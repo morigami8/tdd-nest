@@ -5,6 +5,7 @@
 # Constants
 /src/auth/constants
 .env
+/src/env
 
 # Logs
 logs

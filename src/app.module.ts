@@ -7,6 +7,7 @@ import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
+import { EnvironmentConfigModule } from './infrastructure/config/config.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { Connection } from 'typeorm';
       entities: [User],
     }),
     AuthModule,
+    EnvironmentConfigModule,
   ],
   controllers: [AppController],
   providers: [
