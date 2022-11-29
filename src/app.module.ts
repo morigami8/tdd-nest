@@ -7,10 +7,11 @@ import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
-import { EnvironmentConfigModule } from './infrastructure/config/config.module';
+import { EnvironmentConfigModule } from './infrastructure/config/environment-config/config.module';
 
 @Module({
   imports: [
+    EnvironmentConfigModule,
     UserModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -23,7 +24,6 @@ import { EnvironmentConfigModule } from './infrastructure/config/config.module';
       entities: [User],
     }),
     AuthModule,
-    EnvironmentConfigModule,
   ],
   controllers: [AppController],
   providers: [
