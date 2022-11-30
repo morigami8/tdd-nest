@@ -8,23 +8,10 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
 import { EnvironmentConfigModule } from './infrastructure/config/environment-config/config.module';
+import { TypeormModule } from './infrastructure/config/typeorm/typeorm.module';
 
 @Module({
-  imports: [
-    EnvironmentConfigModule,
-    UserModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      database: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'password123',
-      synchronize: true,
-      entities: [User],
-    }),
-    AuthModule,
-  ],
+  imports: [EnvironmentConfigModule, UserModule, TypeormModule, AuthModule],
   controllers: [AppController],
   providers: [
     AppService,
