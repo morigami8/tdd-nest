@@ -37,7 +37,6 @@ export class UserService {
       .where('user.id = :id', { id: id })
       .getOne();
 
-    this.loggerService.log('200', 'Found one customer!');
     if (!user) {
       throw new NotFoundException("User doesn't exist");
     }

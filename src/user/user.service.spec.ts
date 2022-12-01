@@ -99,6 +99,8 @@ describe('UserService', () => {
       expect.assertions(1);
 
       const id = 'fdsajfd-123asda-asdaf';
+      //TODO: Change to service.findOne
+      //Why is our coverage shitty
       const user = await mockUserRepository.findOne(id);
 
       expect(user).toBeDefined();
