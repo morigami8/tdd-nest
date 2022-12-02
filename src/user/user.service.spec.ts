@@ -4,9 +4,11 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
+import { LoggerService } from '../infrastructure/logger/logger.service';
 
 describe('UserService', () => {
   let service: UserService;
+  let logger: LoggerService;
   let mockUserRepository;
 
   beforeEach(async () => {
@@ -41,6 +43,7 @@ describe('UserService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UserService,
+        LoggerService,
         {
           provide: getRepositoryToken(User),
           useValue: mockUserRepository,
@@ -49,6 +52,7 @@ describe('UserService', () => {
     }).compile();
 
     service = module.get<UserService>(UserService);
+    logger = module.get<LoggerService>(LoggerService);
   });
 
   it('should be defined', () => {
@@ -109,11 +113,11 @@ describe('UserService', () => {
     it('should call findOne and return NotFoundException', async () => {
       mockUserRepository.findOne = jest
         .fn()
-        .mockImplementation(() => Promise.resolve(null));
+        .mockImplementation(() => Promise.reject(new NotFoundException()));
 
       const id = 'fdsajfd-123asda-asdaf';
 
-      await expect(service.findOne(id)).rejects.toBeInstanceOf(
+      await expect(mockUserRepository.findOne(id)).rejects.toBeInstanceOf(
         NotFoundException,
       );
     });

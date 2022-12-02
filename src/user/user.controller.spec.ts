@@ -13,7 +13,7 @@ describe('UserController', () => {
 
   beforeEach(async () => {
     mockUserService = {
-      findOneUser: jest.fn().mockResolvedValue({
+      findOne: jest.fn().mockResolvedValue({
         id: randomUUID(),
         name: 'Morgan',
         email: 'test@test.com',
