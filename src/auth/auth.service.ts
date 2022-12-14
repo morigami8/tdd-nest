@@ -4,6 +4,7 @@ import { scrypt as _scrypt, randomBytes } from 'crypto';
 import { promisify } from 'util';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '../user/user.entity';
 
 const scrypt = promisify(_scrypt);
 
@@ -14,7 +15,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(email: string, pass: string) {
+  async signUp(email: string, pass: string): Promise<User> {
     const saltRounds = 12;
 
     //async
