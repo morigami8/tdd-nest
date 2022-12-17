@@ -31,7 +31,7 @@ class EnvironmentVariables {
   DATABASE_PORT: number;
 
   @IsString()
-  DATABASE_USERNAME: string;
+  DATABASE_USER: string;
 
   @IsString()
   DATABASE_PASSWORD: string;

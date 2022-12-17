@@ -5,6 +5,7 @@ import { UserModule } from '../user/user.module';
 import { AppModule } from '../app.module';
 import { JwtService, JwtModule } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { User } from '../user/user.entity';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -43,10 +44,12 @@ describe('AuthService', () => {
   });
 
   it('should salt password', async () => {
-    const pass = 'password123';
+    let email = 'test@test.com';
+    let password = 'password123';
+    const result: User = { email, password, id: '1', name: 'morgan' };
 
-    const user = await service.signUp('test@test', pass);
+    let user = service.signUp(email, password);
 
-    expect(user).toBe({ email: 'test@test', pass });
+    expect(user).toBe(result);
   });
 });
