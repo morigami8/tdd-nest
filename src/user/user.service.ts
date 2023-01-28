@@ -32,7 +32,9 @@ export class UserService {
   }
 
   async findOne(id: string): Promise<User> {
-    const user = await createQueryBuilder(User, 'user')
+    //const user = await createQueryBuilder(User, 'user')
+    const user = await this.userRepository
+      .createQueryBuilder('user')
       .select('user')
       .where('user.id = :id', { id: id })
       .getOne();
@@ -45,7 +47,7 @@ export class UserService {
   }
 
   async findByEmail(email: string): Promise<User[]> {
-    return this.userRepository.find({ email });
+    return this.userRepository.findBy({ email });
   }
 
   async deleteUser(id: string): Promise<User> {

@@ -4,11 +4,18 @@ import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { AppModule } from '../app.module';
 import { JwtService, JwtModule } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
+import { User } from '../user/user.entity';
 
 describe('AuthService', () => {
   let service: AuthService;
   let mockUsersService: Partial<UserService>;
 
+  mockUsersService = {
+    createUser: jest
+      .fn()
+      .mockImplementation((email, pass) => Promise.resolve({ email, pass })),
+  };
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
@@ -33,5 +40,15 @@ describe('AuthService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should salt password', async () => {
+    let email = 'mo@test.com';
+    let password = 'password123';
+    const result: User = { email, password, id: '1', name: 'morgan' };
+
+    let user = await service.signUp(result.email, result.password);
+
+    expect(user).toBe(result);
   });
 });
