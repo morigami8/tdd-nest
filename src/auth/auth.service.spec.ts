@@ -16,7 +16,6 @@ describe('AuthService', () => {
       .fn()
       .mockImplementation((email, pass) => Promise.resolve({ email, pass })),
   };
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
@@ -44,11 +43,11 @@ describe('AuthService', () => {
   });
 
   it('should salt password', async () => {
-    let email = 'test@test.com';
+    let email = 'mo@test.com';
     let password = 'password123';
     const result: User = { email, password, id: '1', name: 'morgan' };
 
-    let user = service.signUp(email, password);
+    let user = await service.signUp(result.email, result.password);
 
     expect(user).toBe(result);
   });

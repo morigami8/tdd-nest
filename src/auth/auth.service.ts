@@ -31,7 +31,7 @@ export class AuthService {
     return user;
   }
 
-  async validateUser(email: string, pass: string) {
+  async validateUser(email: string, pass: string): Promise<Partial<User>> {
     //find user by email from users service
     //if user exists - get hashed value from response
     //bcrypt compare the password given and the response password
