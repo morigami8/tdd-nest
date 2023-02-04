@@ -18,7 +18,6 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
   async signIn(@Request() req) {
-    let fake = 'hello';
     return this.authService.signUserIn(req.user);
   }
 }

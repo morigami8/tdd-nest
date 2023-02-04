@@ -51,7 +51,7 @@ describe('AuthController', () => {
       });
     });
 
-    test('then it should call authService', () => {
+    test('then it should call authService Sign Up', () => {
       expect(authService.signUp).toBeCalledWith(
         authUserStub().email,
         authUserStub().password,
@@ -60,6 +60,23 @@ describe('AuthController', () => {
 
     test('then it should return a user', () => {
       expect(user).toEqual(authUserStub());
+    });
+  });
+
+  describe('signIn', () => {
+    let user = authUserStub();
+    let req = { user: { ...user } };
+    let accessToken;
+    beforeEach(async () => {
+      accessToken = await authController.signIn(req);
+    });
+
+    test('then it should call authService Sign In', () => {
+      expect(authService.signUserIn).toBeCalledWith(user);
+    });
+
+    test('then it should return an access token', () => {
+      expect(accessToken).toEqual('HDSLAHDJSHL');
     });
   });
 });
