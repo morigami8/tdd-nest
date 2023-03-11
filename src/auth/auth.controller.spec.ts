@@ -51,7 +51,7 @@ describe('AuthController', () => {
       });
     });
 
-    test('then it should call authService Sign Up', () => {
+    test('it should call authService Sign Up', () => {
       expect(authService.signUp).toBeCalledWith(
         authUserStub().email,
         authUserStub().password,
