@@ -11,6 +11,7 @@ describe('UserService', () => {
   let logger: LoggerService;
   let mockUserRepository;
 
+  //TODO: GET FULL COVERAGE OF User.Service
   beforeEach(async () => {
     mockUserRepository = {
       createUser: jest.fn().mockImplementation(async (dto) => {

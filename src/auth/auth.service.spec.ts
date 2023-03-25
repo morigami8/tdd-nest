@@ -13,10 +13,8 @@ jest.mock('../user/user.service.ts');
 describe('AuthService', () => {
   let service: AuthService;
   let usersService: Partial<UserService>;
-  let mockJwtService = {};
-  let user: User = {
-    ...authUserStub(),
-  };
+  let mockJwtService = { sign: jest.fn((payload) => payload) };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       // imports: [
@@ -48,6 +46,12 @@ describe('AuthService', () => {
   });
 
   describe('SignUp', () => {
+    let user: User;
+    beforeEach(() => {
+      user = {
+        ...authUserStub(),
+      };
+    });
     it('should call mockUserService Create User', async () => {
       const spiedSalt = jest
         .spyOn(bcrypt, 'genSalt')
@@ -72,6 +76,12 @@ describe('AuthService', () => {
   });
 
   describe('SignIn', () => {
+    let user: User;
+    beforeEach(() => {
+      user = {
+        ...authUserStub(),
+      };
+    });
     it('should validate user successfully', async () => {
       const spiedSuccessCompare = jest
         .spyOn(bcrypt, 'compare')
@@ -106,6 +116,13 @@ describe('AuthService', () => {
         expect(e.status).toEqual(400);
         expect(e.name).toEqual('BadRequestException');
       }
+    });
+
+    it('should sign user access token', async () => {
+      let response = await service.signUserIn(user);
+
+      expect(mockJwtService.sign).toHaveBeenCalled();
+      expect(response.access_token.sub).toStrictEqual(user.id);
     });
   });
 });
